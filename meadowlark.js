@@ -3,6 +3,13 @@ import {engine} from 'express-handlebars';
 import path from 'path'
 const __dirname=path.resolve()
 
+const fortunes=[
+  "Conquer your fears or they will conquer you.",
+  "River needs springs.",
+  "Do not fear what you don't know.",
+  "You'll have a pleasant surprise."
+]
+
 const app=express()
 
 app.engine('handlebars', engine())
@@ -16,7 +23,8 @@ app.get('/', (req, res)=>{
 })
 
 app.get('/about', (req, res)=>{
-  res.render('about')
+  const randomFortune=fortunes[Math.floor(Math.random()*fortunes.length)]
+  res.render('about', {fortune : randomFortune})
 })
 
 //custom 404 page
